@@ -1,39 +1,45 @@
+#dark {
+  background-color: #212529;
+  color: #adb5bd;
+}
+#light {
+  background-color: #fff !important;
+  color: #212529 !important;
+}
+#dark .nav-link,
+.navbar,
+.navbar-brand {
+  color: #adb5bd !important;
+}
 .App {
-  text-align: center;
+  width: 100% !important;
+  height: 100vh !important;
+  background-color: #212529;
+  color: #adb5bd;
+  overflow-y: scroll;
+}
+#dark .card {
+  background-color: #3e4451 !important;
+  color: #f5f5f5 !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card a{
+  text-decoration: none !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+#dark .card .card-title,.card-subtitle {
+  color: #f5f5f5 !important;
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#light .card .card-subtitle{
+  color: #000 !important;
+}
+#dark .form-control {
+  background-color: #212529 !important;
+  color: #adb5bd;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+#dark .navbar-toggler {
+  background-color: transparent !important;
+  color: rgba(248, 249, 250, 0.65) !important;
 }
