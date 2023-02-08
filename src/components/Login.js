@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/ecommerce/userSlice";
 import Error from "./Error";
-
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 function Login() {
+  const {t} = useTranslation();
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
@@ -29,14 +31,14 @@ function Login() {
       <form onSubmit={handleClick}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
-            Email
+            {t("login.labels.email")}
           </label>
           <input
             type="email"
             autoComplete="off"
             className="form-control"
             id="email"
-            placeholder="name@example.com"
+            placeholder={t("login.placeholder.email")}
             onChange={(e) =>
               setUserLogin({ ...userLogin, email: e.target.value })
             }
@@ -45,13 +47,13 @@ function Login() {
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
-            Password
+          {t("login.labels.password")}
           </label>
           <input
             type="password"
             className="form-control"
             id="password"
-            placeholder="Password"
+            placeholder={t("login.placeholder.password")}
             onChange={(e) =>
               setUserLogin({ ...userLogin, password: e.target.value })
             }
@@ -60,11 +62,11 @@ function Login() {
         </div>
         <div>
           <button type="submit" className="btn btn-primary mb-3">
-            Login
+          {t("login.btn")}
           </button>
         </div>
       </form>
-      {isLogin === false && <Error errorMessage="Fill all the Details" />}
+      {isLogin === false && <Error errorMessage={t("error.fill_details")} />}
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 function Cart() {
   const thumbnail1 = require("../images/empty-cart.jpg");
   const thumbnail2 = require("../images/cart-login.webp");
-  // const auth = useAuth();
-  // const user = auth.getUserLogin();
+
   const { user } = useSelector((state) => state.user);
+  const {t} = useTranslation();
   return (
     <div className="container d-flex justify-content-center">
       {user ? (
@@ -17,10 +19,10 @@ function Cart() {
             alt="product-thumbnail"
           />
           <div className="card-body text-center">
-            <h5 className="card-title">Your basket is empty!</h5>
-            <p className="card-text">Enjoy Upto 10% Savings on Laptops</p>
+            <h5 className="card-title">{t("cart_login.cart_title")}</h5>
+            <p className="card-text">{t("cart_login.cart_subtitle")}</p>
             <Link to="/products" className="btn btn-primary">
-              Shop Now
+            {t("cart_login.cart_btn")}
             </Link>
           </div>
         </div>
@@ -32,12 +34,12 @@ function Cart() {
             alt="product-thumbnail"
           />
           <div className="card-body text-center">
-            <h5 className="card-title">Missing Cart items?</h5>
+            <h5 className="card-title">{t("cart_logout.cart_title")}</h5>
             <p className="card-text">
-              Login to see the items you added previously
+            {t("cart_logout.cart_subtitle")}
             </p>
             <Link to="/login" className="btn btn-primary">
-              Login
+            {t("cart_logout.cart_btn")}
             </Link>
           </div>
         </div>

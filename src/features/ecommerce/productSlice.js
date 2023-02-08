@@ -4,7 +4,8 @@ const initialState = {
   products: [],
   product: {},
   loading: false,
-  error: null,
+  productError: null,
+  productsError: null
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -35,11 +36,20 @@ const productsReducer = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchProducts.rejected, (state) => {
-      state.error = "Something Went Wrong";
+      state.productsError = "Something Went Wrong";
       state.loading = false;
     });
     builder.addCase(fetchProductById.fulfilled, (state, action) => {
       state.product = action.payload;
+      state.loading = false;
+      
+    });
+    builder.addCase(fetchProductById.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchProductById.rejected, (state) => {
+      state.productError = "Something Went Wrong";
+      state.loading = false;
     });
   },
 });

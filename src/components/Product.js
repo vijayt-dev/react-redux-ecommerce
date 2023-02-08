@@ -2,19 +2,25 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "../features/ecommerce/productSlice";
+import Loader from "./Loader";
+import Error from "./Error";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 function Product() {
   const { productId } = useParams();
-  let product = useSelector((state) => state.product.product);
+  const { product, loading, productError } = useSelector(
+    (state) => state.product
+  );
+  const { t } = useTranslation();
+
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductById(productId));
-    return () => {
-      dispatch(fetchProductById());
-    };
   }, [dispatch, productId]);
-  return (
-    <div className="container">
+
+  const card = () => {
+    return (
       <div className="card mb-3">
         <div className="row g-0">
           <div className="col-md-4 p-3">
@@ -36,6 +42,18 @@ function Product() {
           </div>
         </div>
       </div>
+    );
+  };
+  return (
+    <div className="container">
+      {loading && <Loader />}
+      {productError && !loading ? (
+        <div>
+          <Error errorMessage={t("error.went_wrong")} />
+        </div>
+      ) : (
+        <>{card()}</>
+      )}
     </div>
   );
 }
