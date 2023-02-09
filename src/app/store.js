@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "../features/ecommerce/productSlice";
+import productsReducer from "../features/ecommerce/productsSlice";
 import userReducer from "../features/ecommerce/userSlice";
 import themeReducer from "../features/ecommerce/themeSlice";
 import storage from "redux-persist/lib/storage";
@@ -28,6 +29,7 @@ const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 
 export const store = configureStore({
   reducer: {
+    products: productsReducer,
     product: productReducer,
     user: userPersistedReducer,
     theme: themePersistedReducer,

@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../features/ecommerce/productSlice";
+import { fetchProducts } from "../features/ecommerce/productsSlice";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
-import { useTranslation } from 'react-i18next'
-import i18next from 'i18next'
+import { useTranslation } from "react-i18next";
 function Products() {
-  const { products, loading, productsError } = useSelector((state) => state.product);
-  const {t} = useTranslation();
+  const { products, loading, error } = useSelector((state) => state.products);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
@@ -36,12 +35,12 @@ function Products() {
     <div className="container">
       <div className="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
         {loading && <Loader />}
-        {productsError && !loading ? (
+        {error ? (
           <div>
             <Error errorMessage={t("error.went_wrong")} />
           </div>
         ) : (
-          <>{renderElement}</>
+          !loading && <>{renderElement}</>
         )}
       </div>
     </div>

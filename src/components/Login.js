@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../features/ecommerce/userSlice";
 import Error from "./Error";
-import { useTranslation } from 'react-i18next'
-import i18next from 'i18next'
+import { useTranslation } from "react-i18next";
 function Login() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleError = ({ email, password }) => {
     if (email && password) {
@@ -47,7 +45,7 @@ function Login() {
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
-          {t("login.labels.password")}
+            {t("login.labels.password")}
           </label>
           <input
             type="password"
@@ -62,7 +60,7 @@ function Login() {
         </div>
         <div>
           <button type="submit" className="btn btn-primary mb-3">
-          {t("login.btn")}
+            {t("login.btn")}
           </button>
         </div>
       </form>
