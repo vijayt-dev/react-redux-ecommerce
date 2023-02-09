@@ -1,20 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "../features/ecommerce/productSlice";
+import Loader from "./Loader";
+import Error from "./Error";
+import { useTranslation } from "react-i18next";
+
 function Product() {
   const { productId } = useParams();
-  let product = useSelector((state) => state.product.product);
+  const { product, loading, error } = useSelector((state) => state.product);
+  const { t } = useTranslation();
+
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductById(productId));
-    return () => {
-      dispatch(fetchProductById());
-    };
   }, [dispatch, productId]);
-  return (
-    <div className="container">
+
+  const card = useMemo(() => {
+    return (
       <div className="card mb-3">
         <div className="row g-0">
           <div className="col-md-4 p-3">
@@ -31,11 +35,23 @@ function Product() {
               <p className="card-text">
                 <small className="text-muted">{category}</small>
               </p>
-              <button className="btn btn-primary">Add to Cart</button>
+              <button className="btn btn-primary">{t("product.btn")}</button>
             </div>
           </div>
         </div>
       </div>
+    );
+  }, [image, title, price, description, category, t]);
+  return (
+    <div className="container">
+      {loading && <Loader />}
+      {error && !loading ? (
+        <div>
+          <Error errorMessage={t("error.went_wrong")} />
+        </div>
+      ) : (
+        !loading && <>{card}</>
+      )}
     </div>
   );
 }

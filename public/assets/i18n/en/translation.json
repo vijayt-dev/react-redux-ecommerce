@@ -1,0 +1,60 @@
+{
+  "app_title": "OnShop",
+  "Website_name": "OnShop",
+  "language": "Language",
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  },
+  "nav_link": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "profile": "Profile",
+    "login": "Login",
+    "btn": "Logout"
+  },
+  "home": {
+    "tag": "Get Free Shipping on all orders over $50",
+    "banner": {
+      "title": "Fashionable Collection",
+      "subtitle": "Don't Compromise on Style Get Flat 30% OFF for New Arrivals",
+      "btn": "Shop Now"
+    }
+  },
+  "product": {
+    "btn": "Add to Cart"
+  },
+  "cart_logout": {
+    "cart_title": "Missing Cart Items?",
+    "cart_subtitle": "Login to see the items you added previously",
+    "cart_btn": "Login"
+  },
+  "cart_login": {
+    "cart_title": "Your basket is empty!",
+    "cart_subtitle": "Enjoy Upto 10% Savings on Laptops",
+    "cart_btn": "Shop Now"
+  },
+  "login": {
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "name@example.com",
+      "password": "Password"
+    },
+    "btn": "Login"
+  },
+  "profile": {
+    "title": "User Details",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    }
+  },
+  "error": {
+    "fill_details": "Fill all the Details",
+    "went_wrong": "Something Went Wrong"
+  }
+}
