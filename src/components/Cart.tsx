@@ -1,12 +1,13 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { RootState } from "../app/store";
+
 function Cart() {
   const emptyCart = require("../images/empty-cart.jpg");
   const cartLogin = require("../images/cart-login.webp");
 
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
   const { t } = useTranslation();
   return (
     <div className="container d-flex justify-content-center">

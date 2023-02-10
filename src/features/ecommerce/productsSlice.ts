@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Products } from "../../type";
 
-const initialState = {
+const initialState: Products = {
   products: [],
   loading: false,
   error: null,
@@ -33,5 +34,4 @@ const productsReducer = createSlice({
   },
 });
 
-export const { products } = productsReducer.actions;
 export default productsReducer.reducer;

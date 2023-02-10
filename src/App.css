@@ -23,15 +23,16 @@
   color: #f5f5f5 !important;
 }
 
-.card a{
+.card a {
   text-decoration: none !important;
 }
 
-#dark .card .card-title,.card-subtitle {
+#dark .card .card-title,
+.card-subtitle {
   color: #f5f5f5 !important;
 }
 
-#light .card .card-subtitle{
+#light .card .card-subtitle {
   color: #fff !important;
 }
 #dark .form-control {
@@ -41,5 +42,40 @@
 
 #dark .navbar-toggler {
   background-color: transparent !important;
+  filter: invert(1);
   color: rgba(248, 249, 250, 0.65) !important;
+}
+
+.banner {
+  background: linear-gradient(rgba(62, 68, 81, 0.6), rgba(62, 68, 81, 0.6)),
+    url("https://images.unsplash.com/photo-1523380744952-b7e00e6e2ffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 16% 20%;
+}
+.banner-content {
+  text-align: center;
+  color: #f5f5f5;
+}
+.banner-title {
+  font-size: 48px;
+  line-height: 1;
+}
+.banner .btn {
+  background-color: #212529;
+  border: none;
+}
+.banner .btn:hover {
+  background-color: #3e4451;
+}
+.products .product-title {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.products img {
+  width: 250px;
+  height: 250px;
 }

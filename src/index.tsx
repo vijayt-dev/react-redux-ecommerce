@@ -14,7 +14,8 @@ import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Loader from "./components/Loader";
 import "flag-icon-css/css/flag-icons.min.css";
-const container = document.getElementById("root");
+
+const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
 i18next

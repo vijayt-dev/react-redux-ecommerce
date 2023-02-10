@@ -13,13 +13,15 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  Persistor,
 } from "redux-persist";
-const userPersistConfig = {
+import { PersistConfig } from "../type";
+const userPersistConfig: PersistConfig = {
   key: "user-login",
   version: 1,
   storage,
 };
-const themePersistConfig = {
+const themePersistConfig: PersistConfig = {
   key: "theme",
   version: 1,
   storage,
@@ -42,4 +44,6 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+export const persistor: Persistor = persistStore(store);
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

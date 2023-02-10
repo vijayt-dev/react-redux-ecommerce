@@ -1,20 +1,23 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "../features/ecommerce/productSlice";
 import Loader from "./Loader";
 import Error from "./Error";
 import { useTranslation } from "react-i18next";
+import { AppDispatch, RootState } from "../app/store";
 
 function Product() {
   const { productId } = useParams();
-  const { product, loading, error } = useSelector((state) => state.product);
+  const { product, loading, error } = useSelector(
+    (state: RootState) => state.product
+  );
   const { t } = useTranslation();
 
   const { image, title, price, category, description } = product;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(fetchProductById(productId));
+    dispatch(fetchProductById(productId as string));
   }, [dispatch, productId]);
 
   const card = useMemo(() => {
