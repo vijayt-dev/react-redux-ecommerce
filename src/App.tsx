@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
 import Home from "./components/Home";
@@ -11,9 +10,10 @@ import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import { useSelector } from "react-redux";
 import "./App.css";
+import { RootState } from "./app/store";
 
 function App() {
-  const { theme } = useSelector((state) => state.theme);
+  const { theme } = useSelector((state: RootState) => state.theme);
   return (
     <div id={theme} className="App">
       <NavBar />

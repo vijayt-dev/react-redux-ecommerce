@@ -3,24 +3,27 @@ import { useDispatch } from "react-redux";
 import { login } from "../features/ecommerce/userSlice";
 import Error from "./Error";
 import { useTranslation } from "react-i18next";
+import { UserDetails } from "../type";
+import { AppDispatch } from "../app/store";
 function Login() {
   const { t } = useTranslation();
-  const [userLogin, setUserLogin] = useState({
+  const [userLogin, setUserLogin] = useState<UserDetails>({
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const handleError = ({ email, password }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  let [isLogin, setLoginError] = useState<Boolean | null>(null);
+  const handleError = ({ email, password }: UserDetails) => {
     if (email && password) {
       setLoginError(true);
       dispatch(login({ email, password }));
+      setUserLogin({ email: "", password: "" });
     } else {
       setLoginError(false);
     }
   };
-
-  let [isLogin, setLoginError] = useState(null);
-  const handleClick = (e) => {
+  const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
     handleError(userLogin);
   };
@@ -36,7 +39,7 @@ function Login() {
             autoComplete="off"
             className="form-control"
             id="email"
-            placeholder={t("login.placeholder.email")}
+            placeholder={t("login.placeholder.email") as string}
             onChange={(e) =>
               setUserLogin({ ...userLogin, email: e.target.value })
             }
@@ -51,7 +54,7 @@ function Login() {
             type="password"
             className="form-control"
             id="password"
-            placeholder={t("login.placeholder.password")}
+            placeholder={t("login.placeholder.password") as string}
             onChange={(e) =>
               setUserLogin({ ...userLogin, password: e.target.value })
             }
