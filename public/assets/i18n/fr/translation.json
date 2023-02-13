@@ -56,6 +56,7 @@
   },
   "error": {
     "fill_details": "Remplissez tous les détails",
-    "went_wrong": "Quelque chose s'est mal passé"
+    "went_wrong": "Quelque chose s'est mal passé",
+    "wrong_details": "Mauvais e-mail ou mot de passe"
   }
 }
