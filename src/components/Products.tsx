@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  fetchProducts,
-} from "../features/ecommerce/productsSlice";
+import { fetchProducts } from "../features/ecommerce/productsSlice";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { useTranslation } from "react-i18next";
@@ -21,7 +19,7 @@ function Products() {
   }, [dispatch]);
   const renderElement = products
     .filter((product) => {
-      return product.title?.toLowerCase()?.match(searchInput.toLowerCase());
+      return product.title?.toLowerCase().includes(searchInput.toLowerCase());
     })
     .map((product: ProductData) => {
       const { id, title, image, price, category } = product;
