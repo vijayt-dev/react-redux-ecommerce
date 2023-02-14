@@ -25,6 +25,13 @@
   "product": {
     "btn": "Add to Cart"
   },
+  "cart": {
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "btn": "Remove",
+    "total_price": "Total Price"
+  },
   "cart_logout": {
     "cart_title": "Missing Cart Items?",
     "cart_subtitle": "Login to see the items you added previously",
@@ -57,5 +64,8 @@
     "fill_details": "Fill all the Details",
     "went_wrong": "Something Went Wrong",
     "wrong_details": "Wrong Email or Password"
+  },
+  "success": {
+    "product_added": "Product Added Successfully"
   }
 }
