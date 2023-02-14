@@ -40,6 +40,10 @@ type Product = {
 type ErrorMessage = {
   errorMessage: string;
 };
+
+type SuccessMessage = {
+  successMessage: string;
+};
 type UserDetails = {
   email: string;
   password: string;
@@ -68,6 +72,7 @@ type CartData = {
 
 type Carts = {
   carts: CartData[];
-  loading: boolean;
-  error: null | string;
+};
+type Cart = {
+  cart: CartData;
 };

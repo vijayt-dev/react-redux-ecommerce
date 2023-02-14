@@ -26,6 +26,13 @@
   "product": {
     "btn": "Ajouter au panier"
   },
+  "cart": {
+    "product": "Produit",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "btn": "Retirer",
+    "total_price": "Prix total"
+  },
   "cart_logout": {
     "cart_title": "Articles de panier manquants?",
     "cart_subtitle": "Connectez-vous pour voir les éléments que vous avez ajoutés précédemment",
@@ -58,5 +65,8 @@
     "fill_details": "Remplissez tous les détails",
     "went_wrong": "Quelque chose s'est mal passé",
     "wrong_details": "Mauvais e-mail ou mot de passe"
+  },
+  "success": {
+    "product_added": "Produit ajouté avec succès"
   }
 }
