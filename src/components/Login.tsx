@@ -5,6 +5,7 @@ import Error from "./Error";
 import { useTranslation } from "react-i18next";
 import { UserDetails } from "../type";
 import { AppDispatch } from "../app/store";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const { t } = useTranslation();
   const [userLogin, setUserLogin] = useState<UserDetails>({
@@ -12,13 +13,14 @@ function Login() {
     password: "",
   });
   const dispatch = useDispatch<AppDispatch>();
-
+  const navigate = useNavigate();
   let [isLogin, setLoginError] = useState<Boolean | null>(null);
   const handleError = ({ email, password }: UserDetails) => {
     if (email && password) {
       setLoginError(true);
       dispatch(login({ email, password }));
       setUserLogin({ email: "", password: "" });
+      navigate("/products");
     } else {
       setLoginError(false);
     }

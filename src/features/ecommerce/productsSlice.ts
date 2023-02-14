@@ -33,5 +33,4 @@ const productsReducer = createSlice({
     });
   },
 });
-
 export default productsReducer.reducer;
