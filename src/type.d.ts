@@ -55,3 +55,19 @@ type Language = {
   dir: string;
   country_code: string;
 };
+
+type CartData = {
+  id?: number;
+  title?: string;
+  price?: number;
+  category?: string;
+  image?: string;
+  quantity?: number;
+  total?: number;
+};
+
+type Carts = {
+  carts: CartData[];
+  loading: boolean;
+  error: null | string;
+};

@@ -6,7 +6,10 @@ import { RootState } from "../app/store";
 function Cart() {
   const emptyCart = require("../images/empty-cart.jpg");
   const cartLogin = require("../images/cart-login.webp");
-
+  const { product, loading, error } = useSelector(
+    (state: RootState) => state.product
+  );
+  console.log(product);
   const { user } = useSelector((state: RootState) => state.user);
   const { t } = useTranslation();
   return (

@@ -55,6 +55,7 @@
   },
   "error": {
     "fill_details": "Fill all the Details",
-    "went_wrong": "Something Went Wrong"
+    "went_wrong": "Something Went Wrong",
+    "wrong_details": "Wrong Email or Password"
   }
 }

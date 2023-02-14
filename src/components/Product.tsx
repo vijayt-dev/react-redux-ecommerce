@@ -6,6 +6,8 @@ import Loader from "./Loader";
 import Error from "./Error";
 import { useTranslation } from "react-i18next";
 import { AppDispatch, RootState } from "../app/store";
+import Quantity from "./Quantity";
+import Price from "./Price";
 
 function Product() {
   const { productId } = useParams();
@@ -19,7 +21,8 @@ function Product() {
   useEffect(() => {
     dispatch(fetchProductById(productId as string));
   }, [dispatch, productId]);
-
+  const addToCart = () => {
+  }
   const card = useMemo(() => {
     return (
       <div className="card mb-3">
@@ -38,7 +41,11 @@ function Product() {
               <p className="card-text">
                 <small className="text-muted">{category}</small>
               </p>
-              <button className="btn btn-primary">{t("product.btn")}</button>
+              <div className="d-flex align-items-start gap-4">
+                <button className="btn d-block btn-primary" onClick={addToCart}>{t("product.btn")}</button>
+                <Quantity />
+                <Price />
+              </div>
             </div>
           </div>
         </div>

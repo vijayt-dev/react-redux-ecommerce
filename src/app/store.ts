@@ -3,6 +3,8 @@ import productReducer from "../features/ecommerce/productSlice";
 import productsReducer from "../features/ecommerce/productsSlice";
 import userReducer from "../features/ecommerce/userSlice";
 import themeReducer from "../features/ecommerce/themeSlice";
+import cartReducer from "../features/ecommerce/cartsSlice";
+
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -33,6 +35,7 @@ export const store = configureStore({
   reducer: {
     products: productsReducer,
     product: productReducer,
+    carts: cartReducer,
     user: userPersistedReducer,
     theme: themePersistedReducer,
   },
