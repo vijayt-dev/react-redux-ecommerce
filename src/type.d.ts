@@ -76,3 +76,8 @@ type Carts = {
 type Cart = {
   cart: CartData;
 };
+
+type LoginError = {
+  type: string,
+  isError: boolean
+}
