@@ -5,6 +5,8 @@ import userReducer from "../features/ecommerce/userSlice";
 import themeReducer from "../features/ecommerce/themeSlice";
 import cartsReducer from "../features/ecommerce/cartsSlice";
 import cartReducer from "../features/ecommerce/cartSlice";
+import categoryReducer from "../features/ecommerce/categorySlice";
+import filterReducer from "../features/ecommerce/filterSlice";
 
 import storage from "redux-persist/lib/storage";
 import {
@@ -40,10 +42,19 @@ const cartsPersistConfig: PersistConfig = {
   version: 1,
   storage,
 };
+const filtersPersistConfig: PersistConfig = {
+  key: "filters",
+  version: 1,
+  storage,
+};
 const userPersistedReducer = persistReducer(userPersistConfig, userReducer);
 const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 const cartPersistedReducer = persistReducer(cartPersistConfig, cartReducer);
 const cartsPersistedReducer = persistReducer(cartsPersistConfig, cartsReducer);
+const filtersPersistedReducer = persistReducer(
+  filtersPersistConfig,
+  filterReducer
+);
 
 export const store = configureStore({
   reducer: {
@@ -53,6 +64,8 @@ export const store = configureStore({
     cart: cartPersistedReducer,
     user: userPersistedReducer,
     theme: themePersistedReducer,
+    category: categoryReducer,
+    filters: filtersPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

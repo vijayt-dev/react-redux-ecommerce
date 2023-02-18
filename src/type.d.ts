@@ -76,3 +76,15 @@ type Carts = {
 type Cart = {
   cart: CartData;
 };
+
+type Category = string;
+
+type Categories = {
+  categories: Category[];
+  error: null | string;
+};
+
+type Filters = {
+  selectedCategories: string[];
+  searchInput: string;
+};
