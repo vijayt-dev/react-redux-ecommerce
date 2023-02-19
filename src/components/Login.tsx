@@ -2,49 +2,63 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../features/ecommerce/userSlice";
 import { useTranslation } from "react-i18next";
-import { LoginError, UserDetails } from "../type";
+import { Errors, UserDetails } from "../type";
 import { AppDispatch } from "../app/store";
 import { useNavigate } from "react-router-dom";
 import Error from "./Error";
 function Login() {
   const { t } = useTranslation();
+  const initialError = { error: false, message: "" };
   const [userLogin, setUserLogin] = useState<UserDetails>({
     email: "",
     password: "",
   });
+  const [isEmpty, setIsEmpty] = useState<{ error: boolean; message: string }>({
+    error: false,
+    message: "",
+  });
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isValidCrediential, setIsValidCrediential] =
+    useState<Errors>(initialError);
   const loginCredientials: UserDetails = {
     email: "vijay@gmail.com",
     password: "123",
   };
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  let [isLogin, setLoginError] = useState<LoginError>({
-    type: "",
-    isError: false,
-  });
-  const handleError = ({ email, password }: UserDetails) => {
-    if (email && password) {
-      setLoginError({ type: "empty", isError: false });
-      if (
-        email &&
-        password &&
-        email === loginCredientials.email &&
-        password === loginCredientials.password
-      ) {
-        setLoginError({ type: "authentication", isError: false });
-        dispatch(login({ email, password }));
-        setUserLogin({ email: "", password: "" });
-        navigate("/products");
-      } else {
-        setLoginError({ type: "authentication", isError: true });
-      }
+  const handleError = () => {
+    const { email, password } = userLogin;
+    if (!email || !password) {
+      setIsEmpty({
+        ...isEmpty,
+        error: true,
+        message: t("error.fill_details"),
+      });
     } else {
-      setLoginError({ type: "empty", isError: true });
+      setIsEmpty(initialError);
+    }
+    if (
+      (!isEmpty.error && email !== loginCredientials.email) ||
+      password !== loginCredientials.password
+    ) {
+      setIsValidCrediential({
+        ...isValidCrediential,
+        error: true,
+        message: t("error.wrong_details"),
+      });
+    } else {
+      setIsValid(true);
+      setIsValidCrediential(initialError);
     }
   };
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
-    handleError(userLogin);
+    handleError();
+    if (isValid) {
+      dispatch(login(userLogin));
+      setUserLogin({ email: "", password: "" });
+      navigate("/products");
+    }
   };
   return (
     <div className="container">
@@ -86,11 +100,9 @@ function Login() {
           </button>
         </div>
       </form>
-      {isLogin.type === "empty" && isLogin.isError && (
-        <Error errorMessage={t("error.fill_details")} />
-      )}
-      {isLogin.type === "authentication" && isLogin.isError && (
-        <Error errorMessage={t("error.wrong_details")} />
+      {isEmpty.error && <Error errorMessage={isEmpty.message} />}
+      {isValidCrediential.error && (
+        <Error errorMessage={isValidCrediential.message} />
       )}
     </div>
   );
