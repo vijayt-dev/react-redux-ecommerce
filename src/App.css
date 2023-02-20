@@ -86,7 +86,7 @@
 }
 
 #dark .dropdown-item-text,
-.dropdown-menu.show .dropdown-item {
+#dark .dropdown-menu.show .dropdown-item {
   color: #f5f5f5;
 }
 
@@ -99,8 +99,8 @@
   background-color: transparent !important;
 }
 
-#dark table th{
-  color:#f5f5f5;
+#dark table th {
+  color: #f5f5f5;
 }
 
 #dark .product-price {
@@ -113,6 +113,6 @@
   background-color: transparent;
 }
 
-.products a{
+.products a {
   text-decoration: none;
 }
