@@ -46,98 +46,102 @@ function Cart() {
   }, [carts]);
   const table = () => {
     return (
-      <table className="table border">
-        <thead>
-          <tr>
-            <th scope="col">{t("cart.product")}</th>
-            <th scope="col">{t("cart.quantity")}</th>
-            <th scope="col">{t("cart.price")}</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {carts.map((cart) => {
-            return (
-              <tr key={cart.id}>
-                <td>
-                  <div
-                    className="card mb-3 border-0"
-                    style={{ maxWidth: "220px" }}
-                  >
-                    <div className="row g-0">
-                      <div className="col-md-4">
-                        <img
-                          src={cart.image}
-                          className="img-fluid rounded-start"
-                          alt={cart.title}
-                        />
-                      </div>
-                      <div className="col-md-8">
-                        <div className="card-body">
-                          <h5 className="card-title fs-6">{cart.title}</h5>
+      <div className="table-responsive">
+        <table className="table border">
+          <thead>
+            <tr>
+              <th scope="col">{t("cart.product")}</th>
+              <th scope="col">{t("cart.quantity")}</th>
+              <th scope="col">{t("cart.price")}</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {carts.map((cart) => {
+              return (
+                <tr key={cart.id}>
+                  <td>
+                    <div
+                      className="card mb-3  border-0"
+                      style={{ maxWidth: "300px" }}
+                    >
+                      <div className="row g-0">
+                        <div className="col-md-4">
+                          <img
+                            src={cart.image}
+                            className="img-fluid rounded-start"
+                            alt={cart.title}
+                          />
+                        </div>
+                        <div className="col-md-8">
+                          <div className="card-body">
+                            <h5 className="card-title fs-6">{cart.title}</h5>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <div className="input-group mb-3">
-                      <button
-                        className="btn btn-outline-secondary"
-                        type="button"
-                        id="sub-btn"
-                        onClick={() =>
-                          decrementQuantity(
-                            cart.id as number,
-                            cart.quantity as number,
-                            cart.price
-                          )
-                        }
-                      >
-                        -
-                      </button>
+                  </td>
+                  <td>
+                    <div>
+                      <div className="input-group mb-3">
+                        <button
+                          className="btn btn-outline-secondary"
+                          type="button"
+                          id="sub-btn"
+                          onClick={() =>
+                            decrementQuantity(
+                              cart.id as number,
+                              cart.quantity as number,
+                              cart.price
+                            )
+                          }
+                        >
+                          -
+                        </button>
 
-                      <span className="input-group-text">{cart.quantity}</span>
-                      <button
-                        className="btn btn-outline-secondary"
-                        type="button"
-                        id="add-btn"
-                        onClick={() =>
-                          incrementQuantity(
-                            cart.id as number,
-                            cart.quantity as number,
-                            cart.price
-                          )
-                        }
-                      >
-                        +
-                      </button>
+                        <span className="input-group-text">
+                          {cart.quantity}
+                        </span>
+                        <button
+                          className="btn btn-outline-secondary"
+                          type="button"
+                          id="add-btn"
+                          onClick={() =>
+                            incrementQuantity(
+                              cart.id as number,
+                              cart.quantity as number,
+                              cart.price
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-bold mb-1">$ {cart.total?.toFixed(2)}</p>
-                  <span className="fw-light">$ {cart.price} each</span>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => removeCart(cart.id as number)}
-                    className="btn btn-outline-danger"
-                  >
-                    {t("cart.btn")}
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  </td>
+                  <td className="product-price">
+                    <p className="fw-bold mb-1">$ {cart.total?.toFixed(2)}</p>
+                    <span className="fw-light">$ {cart.price} each</span>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() => removeCart(cart.id as number)}
+                      className="btn btn-outline-danger"
+                    >
+                      {t("cart.btn")}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     );
   };
   return (
-    <div className="container mt-4 d-flex justify-content-center flex-column">
+    <div className="container d-flex justify-content-center flex-column">
       {carts.length > 0 ? (
         <>
           {table()}
@@ -149,7 +153,7 @@ function Cart() {
           </div>
         </>
       ) : (
-        <div className="card w-50 mt-3">
+        <div className="card w-50 align-self-center">
           <img
             src={emptyCart}
             className="card-img-top"

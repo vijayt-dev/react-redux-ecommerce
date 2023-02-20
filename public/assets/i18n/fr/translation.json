@@ -2,7 +2,6 @@
   "app_title": "surShop",
   "Website_name": "surShop",
   "language": "Langue",
-  "products": {},
   "theme": {
     "light": "Mode lumière",
     "dark": "Mode sombre"
@@ -22,6 +21,12 @@
       "subtitle": "Ne faites pas de compromis sur le style Obtenez 30% de réduction sur les nouveautés",
       "btn": "Achetez maintenant"
     }
+  },
+  "products": {
+    "placeholder": {
+      "search": "Recherche de produits"
+    },
+    "category": "toutes catégories"
   },
   "product": {
     "btn": "Ajouter au panier"

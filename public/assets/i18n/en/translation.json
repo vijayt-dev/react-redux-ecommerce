@@ -22,6 +22,12 @@
       "btn": "Shop Now"
     }
   },
+  "products": {
+    "placeholder": {
+      "search": "Search Products"
+    },
+    "category": "All Categories"
+  },
   "product": {
     "btn": "Add to Cart"
   },
