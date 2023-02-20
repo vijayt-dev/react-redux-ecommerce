@@ -17,7 +17,6 @@ function Login() {
     error: false,
     message: "",
   });
-  const [isValid, setIsValid] = useState<boolean>(false);
   const [isValidCrediential, setIsValidCrediential] =
     useState<Errors>(initialError);
   const loginCredientials: UserDetails = {
@@ -34,31 +33,26 @@ function Login() {
         error: true,
         message: t("error.fill_details"),
       });
-    } else {
-      setIsEmpty(initialError);
-    }
-    if (
-      (!isEmpty.error && email !== loginCredientials.email) ||
+    } else if (
+      email !== loginCredientials.email ||
       password !== loginCredientials.password
     ) {
+      setIsEmpty(initialError);
       setIsValidCrediential({
         ...isValidCrediential,
         error: true,
         message: t("error.wrong_details"),
       });
     } else {
-      setIsValid(true);
       setIsValidCrediential(initialError);
+      dispatch(login(userLogin));
+      setUserLogin({ email: "", password: "" });
+      navigate("/products");
     }
   };
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
     handleError();
-    if (isValid) {
-      dispatch(login(userLogin));
-      setUserLogin({ email: "", password: "" });
-      navigate("/products");
-    }
   };
   return (
     <div className="container">
