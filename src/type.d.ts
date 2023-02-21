@@ -87,4 +87,8 @@ type Categories = {
 type Filters = {
   selectedCategories: string[];
   searchInput: string;
+}
+type Errors = {
+  error: boolean;
+  message: string;
 };

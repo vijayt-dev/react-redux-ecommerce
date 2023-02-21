@@ -1,33 +1,58 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../features/ecommerce/userSlice";
-import Error from "./Error";
 import { useTranslation } from "react-i18next";
-import { UserDetails } from "../type";
+import { Errors, UserDetails } from "../type";
 import { AppDispatch } from "../app/store";
 import { useNavigate } from "react-router-dom";
+import Error from "./Error";
 function Login() {
   const { t } = useTranslation();
+  const initialError = { error: false, message: "" };
   const [userLogin, setUserLogin] = useState<UserDetails>({
     email: "",
     password: "",
   });
+  const [isEmpty, setIsEmpty] = useState<{ error: boolean; message: string }>({
+    error: false,
+    message: "",
+  });
+  const [isValidCrediential, setIsValidCrediential] =
+    useState<Errors>(initialError);
+  const loginCredientials: UserDetails = {
+    email: "vijay@gmail.com",
+    password: "123",
+  };
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  let [isLogin, setLoginError] = useState<Boolean | null>(null);
-  const handleError = ({ email, password }: UserDetails) => {
-    if (email && password) {
-      setLoginError(true);
-      dispatch(login({ email, password }));
+  const handleError = () => {
+    const { email, password } = userLogin;
+    if (!email || !password) {
+      setIsEmpty({
+        ...isEmpty,
+        error: true,
+        message: t("error.fill_details"),
+      });
+    } else if (
+      email !== loginCredientials.email ||
+      password !== loginCredientials.password
+    ) {
+      setIsEmpty(initialError);
+      setIsValidCrediential({
+        ...isValidCrediential,
+        error: true,
+        message: t("error.wrong_details"),
+      });
+    } else {
+      setIsValidCrediential(initialError);
+      dispatch(login(userLogin));
       setUserLogin({ email: "", password: "" });
       navigate("/products");
-    } else {
-      setLoginError(false);
     }
   };
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
-    handleError(userLogin);
+    handleError();
   };
   return (
     <div className="container">
@@ -69,7 +94,10 @@ function Login() {
           </button>
         </div>
       </form>
-      {isLogin === false && <Error errorMessage={t("error.fill_details")} />}
+      {isEmpty.error && <Error errorMessage={isEmpty.message} />}
+      {isValidCrediential.error && (
+        <Error errorMessage={isValidCrediential.message} />
+      )}
     </div>
   );
 }
