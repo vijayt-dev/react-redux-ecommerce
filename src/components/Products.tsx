@@ -13,6 +13,7 @@ import Error from "../components/Error";
 import { useTranslation } from "react-i18next";
 import { AppDispatch, RootState } from "../app/store";
 import { ProductData } from "../type";
+import classNames from "classnames";
 function Products() {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
@@ -46,20 +47,24 @@ function Products() {
       const { id, title, image, price, category } = product;
       return (
         <div className="col products" key={id}>
-          <div className="card">
-            <img src={image} className="card-img-top p-2" alt={title} />
-            <div className="card-body mt-2">
-              <Link to={`/product/${id}`}>
-                <h5 className="card-title product-title" title={title}>
+          <Link to={`/product/${id}`}>
+            <div className="card">
+              <img src={image} className="card-img-top p-2" alt={title} />
+              <div className="card-body mt-2">
+                <h5
+                  className="card-title fw-normal product-title"
+                  title={title}
+                >
                   {title}
                 </h5>
-              </Link>
-              <h6 className="card-subtitle mt-1">$ {price}</h6>
-              <p className="card-text">
-                <small className="text-muted">{category}</small>
-              </p>
+
+                <h6 className="card-subtitle fw-bold mt-1">$ {price}</h6>
+                <p className="card-text">
+                  <small className="text-muted">{category}</small>
+                </p>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       );
     });
@@ -129,27 +134,27 @@ function Products() {
   return (
     <div className="container mb-4">
       <div className="row">
-        <div className="col-6">
+        <div className="col-8">
           <input
             className="form-control mb-3"
             type="search"
-            placeholder="Search Products"
+            placeholder={t("products.placeholder.search") as string}
             value={searchInput}
             aria-label="Search"
             onChange={(e) => dispatch(setSearchInput(e.target.value))}
           />
         </div>
-        <div className="col-6">
-          <div className="dropdown">
+        <div className="col-4">
+          <div className="dropdown-center">
             <button
-              className="btn btn-secondary dropdown-toggle"
+              className="btn btn-secondary w-100 dropdown-toggle"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              All Categories
+              {t("products.category")}
             </button>
-            <ul className="dropdown-menu">{categoryElement}</ul>
+            <ul className="dropdown-menu dropdown-menu">{categoryElement}</ul>
           </div>
         </div>
       </div>

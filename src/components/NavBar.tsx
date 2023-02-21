@@ -66,7 +66,7 @@ function NavBar() {
     document.title = t("app_title");
   }, [currentLanguage, t]);
   return (
-    <header className="container">
+    <header className="container mb-3">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <NavLink to="/" className="navbar-brand">
