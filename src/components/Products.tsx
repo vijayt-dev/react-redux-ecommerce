@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../features/ecommerce/productsSlice";
@@ -8,12 +8,14 @@ import {
   setSelectedCategories,
 } from "../features/ecommerce/filterSlice";
 
+import { setPage } from "../features/ecommerce/paginationSlice";
+
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { useTranslation } from "react-i18next";
 import { AppDispatch, RootState } from "../app/store";
 import { ProductData } from "../type";
-import classNames from "classnames";
+import ReactPaginate from "react-paginate";
 function Products() {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
@@ -22,14 +24,18 @@ function Products() {
   const { searchInput, selectedCategories } = useSelector(
     (state: RootState) => state.filters
   );
+
+  const { page } = useSelector((state: RootState) => state.pagination);
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
   }, [dispatch]);
-
-  const productsElement = products
+  const [productsPerPage] = useState<number>(5);
+  const indexOfLastPost: number = page * productsPerPage;
+  const indexOfFirstPost: number = indexOfLastPost - productsPerPage;
+  const currentProducts: ProductData[] = products
     .filter((product) => {
       return product.title?.toLowerCase().includes(searchInput.toLowerCase());
     })
@@ -42,7 +48,9 @@ function Products() {
         if (product["category"] === key) return true;
       }
       return false;
-    })
+    });
+
+  const productsElement: JSX.Element[] = currentProducts
     .map((product: ProductData) => {
       const { id, title, image, price, category } = product;
       return (
@@ -67,7 +75,12 @@ function Products() {
           </Link>
         </div>
       );
-    });
+    })
+    .slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = ({ selected }: { selected: number }) => {
+    dispatch(setPage(selected + 1));
+  };
+
   const categoryOptions = useMemo(
     () =>
       category.categories.map((category) => {
@@ -159,14 +172,44 @@ function Products() {
         </div>
       </div>
 
-      <div className="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+      <div>
         {loading && <Loader />}
         {error ? (
           <div>
             <Error errorMessage={t("error.went_wrong")} />
           </div>
         ) : (
-          !loading && <>{productsElement}</>
+          !loading && (
+            <>
+              <div className="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+                {productsElement}
+              </div>
+              {productsElement.length > 0 && (
+                <div className="pagination justify-content-center mt-3">
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Next &raquo;"
+                    onPageChange={paginate}
+                    pageCount={Math.ceil(
+                      currentProducts.length / productsPerPage
+                    )}
+                    previousLabel="&laquo; Previous"
+                    breakClassName={"page-item"}
+                    breakLinkClassName={"page-link"}
+                    containerClassName={"pagination"}
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item"}
+                    initialPage={page ? page - 1 : 1}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item"}
+                    nextLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                  />
+                </div>
+              )}
+            </>
+          )
         )}
       </div>
     </div>

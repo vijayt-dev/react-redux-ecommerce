@@ -92,3 +92,7 @@ type Errors = {
   error: boolean;
   message: string;
 };
+
+type Page = {
+  page: number;
+};
