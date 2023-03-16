@@ -7,6 +7,7 @@ import cartsReducer from "../features/ecommerce/cartsSlice";
 import cartReducer from "../features/ecommerce/cartSlice";
 import categoryReducer from "../features/ecommerce/categorySlice";
 import filterReducer from "../features/ecommerce/filterSlice";
+import paginationReducer from "../features/ecommerce/paginationSlice";
 
 import storage from "redux-persist/lib/storage";
 import {
@@ -47,6 +48,11 @@ const filtersPersistConfig: PersistConfig = {
   version: 1,
   storage,
 };
+const paginationPersistConfig: PersistConfig = {
+  key: "pagination",
+  version: 1,
+  storage,
+};
 const userPersistedReducer = persistReducer(userPersistConfig, userReducer);
 const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 const cartPersistedReducer = persistReducer(cartPersistConfig, cartReducer);
@@ -54,6 +60,10 @@ const cartsPersistedReducer = persistReducer(cartsPersistConfig, cartsReducer);
 const filtersPersistedReducer = persistReducer(
   filtersPersistConfig,
   filterReducer
+);
+const paginationPersistedReducer = persistReducer(
+  paginationPersistConfig,
+  paginationReducer
 );
 
 export const store = configureStore({
@@ -66,6 +76,7 @@ export const store = configureStore({
     theme: themePersistedReducer,
     category: categoryReducer,
     filters: filtersPersistedReducer,
+    pagination: paginationPersistedReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
